@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Dc_comic;
+
 class DC_comicController extends Controller
 {
     /**
@@ -13,7 +15,9 @@ class DC_comicController extends Controller
      */
     public function index()
     {
-        //
+        $comics  = DC_comic :: all();
+
+        return view('dc-comics.index', compact('comics'));
     }
 
     /**
@@ -23,7 +27,7 @@ class DC_comicController extends Controller
      */
     public function create()
     {
-        //
+        return view('dc-comics.create');
     }
 
     /**
@@ -34,7 +38,21 @@ class DC_comicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comics = $request -> all();
+
+        $comic = Dc_comic :: create([
+
+            'title' => $comics["title"],
+            'description'=> $comics["description"],
+            'thumb'=> $comics["thumb"],
+            'price'=> $comics["price"],
+            'series'=> $comics["series"],
+            'sale_date'=> $comics["sale_date"],
+            'type'=> $comics["type"],
+        ]);
+
+        return redirect() -> route("dc-comics.show", $comic -> id);
+
     }
 
     /**
@@ -45,40 +63,10 @@ class DC_comicController extends Controller
      */
     public function show($id)
     {
-        //
+        $comic = Dc_comic :: findOrFail($id);
+
+        return view('dc-comics.show', compact('comic'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }
