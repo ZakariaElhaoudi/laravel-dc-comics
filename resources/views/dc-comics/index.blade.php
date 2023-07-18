@@ -20,15 +20,14 @@
                     <a href="{{ route('dc-comics.show', $comic -> id) }}">
                         {{ $comic -> title }}
                     </a>
-                    <div>
+                    <div >
                         <a class="btn btn-dark" href="{{ route('dc-comics.edit', $comic -> id) }}">Modifica</a>
                        
                         <form method="POST" action="{{ route('dc-comics.destroy', $comic -> id) }}">
-
                             @csrf
                             @method('DELETE')
-    
-                            <input  class="btn btn-danger" type="submit" value="DELETE">
+                            
+                             <input  class="btn btn-danger" type="submit" value="ELIMINA">
                         </form>
                     </div>
                 </h2>

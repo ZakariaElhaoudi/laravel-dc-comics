@@ -22,7 +22,6 @@
     <div class="container_fluid">
         @yield('content')
     </div>
-
     @include('components.footer')
 
 </body>
