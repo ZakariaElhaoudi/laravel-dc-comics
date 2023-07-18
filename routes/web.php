@@ -31,3 +31,6 @@ Route :: get("/dc-comics/edit{id}", [DC_comicController :: class, "edit"])
 
 Route :: put("/dc-comics/update{id}", [DC_comicController :: class, "update"])
     -> name('dc-comics.update');
+
+Route :: delete("/dc-comics/destroy{id}", [DC_comicController :: class, "destroy"])
+    -> name('dc-comics.destroy');
