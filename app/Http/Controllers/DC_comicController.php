@@ -93,6 +93,6 @@ class DC_comicController extends Controller
 
         $comic -> delete();
 
-        return view('dc-comics.index');
+        return  redirect() -> route('dc-comics.index');
     }
 }
