@@ -8,6 +8,9 @@
         </h1>
 
         <div class="card">
+            <div class="card-img " ">
+                <img style="max-width:100%;" src="{{ $comic -> thumb }}" alt="">
+            </div>
             <div class="card-header">  
                 <h2>
                     <a href="{{ route('dc-comics.show', $comic -> id) }}">

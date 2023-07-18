@@ -6,15 +6,22 @@
             DC COMICS
             <a href="{{ route('dc-comics.create') }}">+</a>
         </h1>
-    
-        <div class="card">
+
+         @foreach ($comics as $comic)
+        <div class="card my-4">
                 
-            @foreach ($comics as $comic)
+          
+            <div class="card-img" style="max-width:300px;">
+                <img style="max-width:100%;" src="{{ $comic -> thumb }}" alt="">
+
+            </div>
             <div class="card-header">  
-                <h2>
+                <h2 class="d-flex justify-content-between align-items-center">
                     <a href="{{ route('dc-comics.show', $comic -> id) }}">
                         {{ $comic -> title }}
                     </a>
+
+                    <a class="btn btn-dark" href="{{ route('dc-comics.edit', $comic -> id) }}">Modifica</a>
                 </h2>
         
             </div>
@@ -29,9 +36,9 @@
             
                     
                       
-            
+             </div>
             @endforeach
             
-        </div>
+       
     </div>
 @endsection

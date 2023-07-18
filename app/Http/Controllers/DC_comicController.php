@@ -68,5 +68,31 @@ class DC_comicController extends Controller
         return view('dc-comics.show', compact('comic'));
     }
 
-    
+    public function edit($id)
+    {
+        $comic = Dc_comic :: findOrFail($id);
+
+        return view('dc-comics.edit', compact('comic'));
+    }
+
+    public function update(Request $request)
+    {
+        $comics = $request -> all();
+
+        $comic = Dc_comic :: create([
+
+            'title' => $comics["title"],
+            'description'=> $comics["description"],
+            'thumb'=> $comics["thumb"],
+            'price'=> $comics["price"],
+            'series'=> $comics["series"],
+            'sale_date'=> $comics["sale_date"],
+            'type'=> $comics["type"],
+        ]);
+
+        $comic -> update($comics);
+
+        return redirect() -> route("dc-comics.show", $comic -> id);
+
+    }
 }
