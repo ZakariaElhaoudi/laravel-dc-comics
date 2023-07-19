@@ -38,18 +38,11 @@ class DC_comicController extends Controller
      */
     public function store(Request $request)
     {
-        $comics = $request -> all();
+        $comics = $request -> validate(
+            $this-> getValidationRule()
+        );
 
-        $comic = Dc_comic :: create([
-
-            'title' => $comics["title"],
-            'description'=> $comics["description"],
-            'thumb'=> $comics["thumb"],
-            'price'=> $comics["price"],
-            'series'=> $comics["series"],
-            'sale_date'=> $comics["sale_date"],
-            'type'=> $comics["type"],
-        ]);
+        $comic = Dc_comic :: create($comics);
 
         return redirect() -> route("dc-comics.show", $comic -> id);
 
@@ -77,7 +70,9 @@ class DC_comicController extends Controller
 
     public function update(Request $request, $id)
     {
-        $comics = $request -> all();
+        $comics = $request -> validate(
+            $this-> getValidationRule()
+        );
 
         $comic = DC_comic :: findOrFail($id);
 
@@ -94,5 +89,20 @@ class DC_comicController extends Controller
         $comic -> delete();
 
         return  redirect() -> route('dc-comics.index');
+    }
+
+    private function getValidationRule()
+    {
+        return [
+
+            'title' => 'required|unique:dc_comics',
+            'description' => 'required',
+            'thumb' => 'required',
+            'price' => 'required',
+            'series' => 'required',
+            'sale_date' => 'required',
+            'type' => 'required',
+
+        ]; 
     }
 }
